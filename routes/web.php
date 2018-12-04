@@ -16,7 +16,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function(){
-	return view('auth.login');
+	return redirect()->route('criteria.index');
 });
 
 Route::prefix('alternative')->name('alternative.')->group(function(){

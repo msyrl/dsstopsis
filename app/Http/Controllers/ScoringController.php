@@ -23,7 +23,7 @@ class ScoringController extends Controller
         $alternatives = Alternative::orderBy('name')->has('scores')->get();
         $criterias = Criteria::all();
 
-        if (count(Score::all()) == 0) {
+        if (count(Alternative::has('scores')->get()) < 2) {
             return redirect()->route('score.index')->with('info','Belum ada nilai yang diinputkan');
         }
 
