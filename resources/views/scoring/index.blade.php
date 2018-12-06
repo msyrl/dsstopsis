@@ -119,15 +119,15 @@
 		</div>
 		<div id="collapseFour" class="collapse show">
 			<div class="card-body">
-				<p class="alert alert-primary">Nilai preferensi terbesar adalah nilai terbaik</p>
+				<p class="alert alert-primary">Nilai ci terbesar adalah nilai terbaik</p>
 				<div class="table-responsive">
 					<table id="table-result" class="table table-bordered">
 						<thead>
 							<tr>
 								<th width="20%">Alternatif</th>
-								<th>Positif</th>
-								<th>Negatif</th>
-								<th>Preferensi</th>
+								<th>di+</th>
+								<th>di-</th>
+								<th>ci</th>
 							</tr>
 						</thead>
 						<tbody>
