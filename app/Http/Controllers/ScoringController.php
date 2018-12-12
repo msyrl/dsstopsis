@@ -35,9 +35,7 @@ class ScoringController extends Controller
         $solusiMinus = [];
         $_dPlus = [];
         $_dMinus = [];
-        $dPlus = [];
-        $dMinus = [];
-        $v = [];
+        $result = [];
 
         foreach ($criterias as $key => $criteria) {
             $sums[$key] = 0;
@@ -71,27 +69,19 @@ class ScoringController extends Controller
                 $_dMinus[$key][] = pow($nW-$solusiMinus[$k],2);
             }
         }
+
         foreach ($alternatives as $key => $alternative) {
-            $dPlus[$key] = sqrt(array_sum($_dPlus[$key]));
-            $dMinus[$key] = sqrt(array_sum($_dMinus[$key]));
-            $v[$key] = $dMinus[$key]/($dMinus[$key]+$dPlus[$key]);
+            $result[$key] = [];
+            $result[$key]['data'] = $alternative->name;
+            $result[$key]['dMinus'] = sqrt(array_sum($_dMinus[$key]));
+            $result[$key]['dPlus'] = sqrt(array_sum($_dPlus[$key]));
+            $result[$key]['v'] = $result[$key]['dMinus']/($result[$key]['dMinus']+$result[$key]['dPlus']);
         }
 
-        $result = [];
-
-        for ($i=0; $i < count($alternatives); $i++) { 
-            $result[$i] = [];
-            $result[$i]['data'] = Alternative::find($i+1);
-            $result[$i]['dMinus'] = sqrt(array_sum($_dMinus[$i]));
-            $result[$i]['dPlus'] = sqrt(array_sum($_dPlus[$i]));
-            $result[$i]['v'] = $result[$i]['dMinus']/($result[$i]['dMinus']+$result[$i]['dPlus']);
-        }
-
+        // mengurutkan berdasarkan v terbesar
         uasort($result, function ($a,$b) {
             return $a['v'] < $b['v'];
         });
-
-        // dd($normalizationWeights,$solusiPlus,$solusiMinus,$_dPlus,$_dMinus,$dPlus,$dMinus,$v);
 
         return view('scoring.index')->with([
             'alternatives' => $alternatives,
@@ -101,9 +91,6 @@ class ScoringController extends Controller
             'normalizationWeights' => $normalizationWeights,
             'solusiPlus' => $solusiPlus,
             'solusiMinus' => $solusiMinus,
-            'dPlus' => $dPlus,
-            'dMinus' => $dMinus,
-            'v' => $v,
             'result' => $result,
         ]);
     }

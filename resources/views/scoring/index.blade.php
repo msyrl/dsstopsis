@@ -121,43 +121,7 @@
 				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"><i class="fa fa-list"></i></button>
 			</h1>
 		</div>
-		<div id="collapseFour" class="collapse">
-			<div class="card-body">				
-				<div class="table-responsive">
-					<table id="table-result" class="table table-bordered">
-						<thead>
-							<tr>
-								<th width="1%">#</th>
-								<th width="20%">Alternatif</th>
-								<th>di+</th>
-								<th>di-</th>
-								<th>ci</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($alternatives as $key => $alternative)
-							<tr>
-								<td>{{ $key+1 }}</td>
-								<td>{{ $alternative->name }}</td>
-								<td>{{ $dPlus[$key] }}</td>
-								<td>{{ $dMinus[$key] }}</td>
-								<td>{{ $v[$key] }}</td>
-							</tr>
-							@endforeach
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="card">
-		<div class="card-header">
-			<h1 class="card-title">
-				Ranking
-				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"><i class="fa fa-list"></i></button>
-			</h1>
-		</div>
-		<div id="collapseFive" class="collapse show">
+		<div id="collapseFour" class="collapse show">
 			<div class="card-body">
 				<p class="alert alert-primary">Nilai ci terbesar adalah nilai terbaik</p>
 				<div class="table-responsive">
@@ -176,7 +140,7 @@
 							@foreach($result as $key => $value)
 							<tr>
 								<td class="text-right">{{ $no++ }}</td>
-								<td>{{ $value['data']->name }}</td>
+								<td>{{ $value['data'] }}</td>
 								<td>{{ $value['dPlus'] }}</td>
 								<td>{{ $value['dMinus'] }}</td>
 								<td>{{ $value['v'] }}</td>
