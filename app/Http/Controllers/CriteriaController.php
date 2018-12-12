@@ -23,7 +23,7 @@ class CriteriaController extends Controller
         // ]);
 
         return view('criteria.index')->with([
-            'criterias' => Criteria::orWhere('name','LIKE','%'.request('q').'%')->orWhere('weight','LIKE','%'.request('q').'%')->orderBy('id','DESC')->get(),
+            'criterias' => Criteria::orWhere('name','LIKE','%'.request('q').'%')->orWhere('weight','LIKE','%'.request('q').'%')->get(),
         ]);
     }
 

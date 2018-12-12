@@ -25,6 +25,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
+							<th width="1%">#</th>
 							<th>Nama</th>
 							<th>No HP</th>
 							<th>Alamat</th>
@@ -32,8 +33,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($alternatives as $alternative)
+						@foreach($alternatives as $key => $alternative)
 							<tr>
+								<td class="text-right">{{ $key+1 }}</td>
 								<td>{{ $alternative->name }}</td>
 								<td>{{ $alternative->phone_number }}</td>
 								<td>{{ $alternative->address }}</td>

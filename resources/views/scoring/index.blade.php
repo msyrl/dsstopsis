@@ -17,6 +17,7 @@
 					<table id="table-normalizations" class="table table-bordered">
 						<thead>
 							<tr>
+								<th width="1%">#</th>
 								<th>Alternatif</th>
 								@foreach($criterias as $criteria)
 								<th>{{ $criteria->name }}</th>
@@ -26,6 +27,7 @@
 						<tbody>
 							@foreach($alternatives as $key => $alternative)
 							<tr>
+								<td class="text-right">{{ $key+1 }}</td>
 								<td width="20%">{{ $alternative->name }}</td>
 								@foreach($normalizations[$key] as $k => $normalization)
 								<td>{{ $normalization }}</td>
@@ -51,6 +53,7 @@
 					<table id="table-normalization-weights" class="table table-bordered">
 						<thead>
 							<tr>
+								<th width="1%">#</th>
 								<th>Alternatif</th>
 								@foreach($criterias as $criteria)
 								<th>{{ $criteria->name }}</th>
@@ -60,6 +63,7 @@
 						<tbody>
 							@foreach($alternatives as $key => $alternative)
 							<tr>
+								<td class="text-right">{{ $key+1 }}</td>
 								<td width="20%">{{ $alternative->name }}</td>
 								@foreach($normalizationWeights[$key] as $k => $normalizationWeight)
 								<td>{{ $normalizationWeight }}</td>
@@ -85,7 +89,7 @@
 					<table id="table-solusi" class="table table-bordered">
 						<thead>
 							<tr>
-								<th>#</th>
+								<th width="1%">#</th>
 								@foreach($criterias as $criteria)
 								<th>{{ $criteria->name }}</th>
 								@endforeach
@@ -117,13 +121,13 @@
 				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour"><i class="fa fa-list"></i></button>
 			</h1>
 		</div>
-		<div id="collapseFour" class="collapse show">
-			<div class="card-body">
-				<p class="alert alert-primary">Nilai ci terbesar adalah nilai terbaik</p>
+		<div id="collapseFour" class="collapse">
+			<div class="card-body">				
 				<div class="table-responsive">
 					<table id="table-result" class="table table-bordered">
 						<thead>
 							<tr>
+								<th width="1%">#</th>
 								<th width="20%">Alternatif</th>
 								<th>di+</th>
 								<th>di-</th>
@@ -133,6 +137,7 @@
 						<tbody>
 							@foreach($alternatives as $key => $alternative)
 							<tr>
+								<td>{{ $key+1 }}</td>
 								<td>{{ $alternative->name }}</td>
 								<td>{{ $dPlus[$key] }}</td>
 								<td>{{ $dMinus[$key] }}</td>
@@ -145,25 +150,50 @@
 			</div>
 		</div>
 	</div>
+	<div class="card">
+		<div class="card-header">
+			<h1 class="card-title">
+				Ranking
+				<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFive"><i class="fa fa-list"></i></button>
+			</h1>
+		</div>
+		<div id="collapseFive" class="collapse show">
+			<div class="card-body">
+				<p class="alert alert-primary">Nilai ci terbesar adalah nilai terbaik</p>
+				<div class="table-responsive">
+					<table id="table-result2" class="table table-bordered">
+						<thead>
+							<tr>
+								<th width="5%">Ranking</th>
+								<th width="20%">Alternatif</th>
+								<th>di+</th>
+								<th>di-</th>
+								<th>ci</th>
+							</tr>
+						</thead>
+						<tbody>
+							@php $no=1; @endphp
+							@foreach($result as $key => $value)
+							<tr>
+								<td class="text-right">{{ $no++ }}</td>
+								<td>{{ $value['data']->name }}</td>
+								<td>{{ $value['dPlus'] }}</td>
+								<td>{{ $value['dMinus'] }}</td>
+								<td>{{ $value['v'] }}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('#table-normalizations').DataTable({
+			$('table').DataTable({
 				'bLengthChange': false,
-			});
-			$('#table-normalization-weights').DataTable({
-				'bLengthChange': false,
-			});
-			$('#table-solusi').DataTable({
-				'bLengthChange': false,
-			});
-			$('#table-result').DataTable({
-				'bLengthChange': false,
-				order: [[ 3, 'desc']],
-				columnDefs: [
-					{ orderable: false, targets: [0,1,2]}
-				]
-			});
+			});			
 		});
 	</script>
 @endsection

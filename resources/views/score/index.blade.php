@@ -25,6 +25,7 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
+							<th width="1%">#</th>
 							<th>Nama</th>
 							@foreach($criterias as $criteria)
 							<th>{{ $criteria->name }}</th>
@@ -33,8 +34,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($alternatives as $alternative)
+						@foreach($alternatives as $key => $alternative)
 							<tr>
+								<td class="text-right">{{ $key+1 }}</td>
 								<td>{{ $alternative->name }}</td>
 								@foreach($alternative->scores as $score)
 									<td>{{ $score->score }}</td>

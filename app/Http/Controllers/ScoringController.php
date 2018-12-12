@@ -20,7 +20,7 @@ class ScoringController extends Controller
      */
     public function index()
     { 
-        $alternatives = Alternative::orderBy('name')->has('scores')->get();
+        $alternatives = Alternative::has('scores')->get();
         $criterias = Criteria::all();
 
         if (count(Alternative::has('scores')->get()) < 2) {
@@ -77,6 +77,20 @@ class ScoringController extends Controller
             $v[$key] = $dMinus[$key]/($dMinus[$key]+$dPlus[$key]);
         }
 
+        $result = [];
+
+        for ($i=0; $i < count($alternatives); $i++) { 
+            $result[$i] = [];
+            $result[$i]['data'] = Alternative::find($i+1);
+            $result[$i]['dMinus'] = sqrt(array_sum($_dMinus[$i]));
+            $result[$i]['dPlus'] = sqrt(array_sum($_dPlus[$i]));
+            $result[$i]['v'] = $result[$i]['dMinus']/($result[$i]['dMinus']+$result[$i]['dPlus']);
+        }
+
+        uasort($result, function ($a,$b) {
+            return $a['v'] < $b['v'];
+        });
+
         // dd($normalizationWeights,$solusiPlus,$solusiMinus,$_dPlus,$_dMinus,$dPlus,$dMinus,$v);
 
         return view('scoring.index')->with([
@@ -90,6 +104,7 @@ class ScoringController extends Controller
             'dPlus' => $dPlus,
             'dMinus' => $dMinus,
             'v' => $v,
+            'result' => $result,
         ]);
     }
 

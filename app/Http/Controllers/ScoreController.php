@@ -22,7 +22,7 @@ class ScoreController extends Controller
     {
         return view('score.index')->with([
             'criterias' => Criteria::all(),
-            'alternatives' => Alternative::orWhere('name','LIKE','%'.request('q').'%')->orderBy('name','ASC')->has('scores')->get(),
+            'alternatives' => Alternative::orWhere('name','LIKE','%'.request('q').'%')->has('scores')->get(),
         ]);
     }
 
@@ -34,7 +34,7 @@ class ScoreController extends Controller
     public function create()
     {
         return view('score.create')->with([
-            'alternatives' => Alternative::orderBy('name','ASC')->doesntHave('scores')->get(),
+            'alternatives' => Alternative::doesntHave('scores')->get(),
             'criterias' => Criteria::all(),
         ]);
     }

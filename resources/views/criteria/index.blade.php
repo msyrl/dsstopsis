@@ -25,14 +25,16 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
+							<th width="1%">#</th>
 							<th>Nama</th>
 							<th>Bobot</th>
 							<th width="5%">Aksi</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($criterias as $criteria)
+						@foreach($criterias as $key => $criteria)
 							<tr>
+								<td class="text-right">{{ $key+1 }}</td>
 								<td>{{ $criteria->name }}</td>
 								<td>{{ $criteria->weight }}</td>
 								<td>

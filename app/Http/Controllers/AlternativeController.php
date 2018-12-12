@@ -23,7 +23,7 @@ class AlternativeController extends Controller
         // ]);
 
         return view('alternative.index')->with([
-            'alternatives' => Alternative::orWhere('name','LIKE','%'.request('q').'%')->orWhere('phone_number','LIKE','%'.request('q').'%')->orWhere('address','LIKE','%'.request('q').'%')->orderBy('id','DESC')->get(),
+            'alternatives' => Alternative::orWhere('name','LIKE','%'.request('q').'%')->orWhere('phone_number','LIKE','%'.request('q').'%')->orWhere('address','LIKE','%'.request('q').'%')->get(),
         ]);
     }
 
